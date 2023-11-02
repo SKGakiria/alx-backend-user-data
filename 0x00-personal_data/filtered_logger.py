@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """Module containing function to attain a log message obfuscated"""
+from typing import List
 import logging
 import mysql.connector
 import os
-from typing import List
 import re
 
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: List[str], redaction: str, message: str,
+                 separator: str) -> str:
     """Function returns the log message obfuscated"""
     for field in fields:
         message = re.sub(field+'=.*?'+separator,
