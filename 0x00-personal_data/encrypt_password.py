@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Module containing a hash_password function"""
+from bcrypt import hashpw
 import bcrypt
 
 
