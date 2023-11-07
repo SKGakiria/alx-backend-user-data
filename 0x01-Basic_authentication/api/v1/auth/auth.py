@@ -21,7 +21,7 @@ class Auth:
                 if path.startswith(p):
                     return False
                 if p[-1] == "*":
-                    if path.startswith(i[:-1]):
+                    if path.startswith(p[:-1]):
                         return False
         return True
 
