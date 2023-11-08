@@ -27,6 +27,7 @@ def before_request():
     if auth is None:
         pass
     else:
+        setattr(request, "current_user", auth.current_user(request))
         p_excluded = [
             '/api/v1/status/',
             '/api/v1/unauthorized/',
