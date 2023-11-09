@@ -8,6 +8,7 @@ import os
 from api.v1.views import app_views
 from api.v1.auth.auth import Auth
 from api.v1.auth.basic_auth import BasicAuth
+from api.v1.auth.session_auth import SessionAuth
 
 
 app = Flask(__name__)
@@ -19,6 +20,8 @@ if AUTH_TYPE == "auth":
     auth = Auth()
 elif AUTH_TYPE == "basic_auth":
     auth = BasicAuth()
+elif AUTH_TYPE == "session_auth":
+    auth = SessionAuth()
 
 
 @app.before_request
