@@ -16,8 +16,8 @@ class SessionDBAuth(SessionExpAuth):
             "user_id": user_id,
             "session_id": session_id
         }
-        usr_session = UserSession(**kwargs)
-        usr_session.save()
+        user_session = UserSession(**kwargs)
+        user_session.save()
         return ses_id
 
     def user_id_for_session_id(self, session_id=None):
@@ -35,8 +35,8 @@ class SessionDBAuth(SessionExpAuth):
         ses_id = self.session_cookie(request)
         if not ses_id:
             return False
-        user_session = UserSession.search({"session_id": session_id})
-        if user_session:
-            user_session[0].remove()
+        session = UserSession.search({"session_id": session_id})
+        if session:
+            session[0].remove()
             return True
         return False
