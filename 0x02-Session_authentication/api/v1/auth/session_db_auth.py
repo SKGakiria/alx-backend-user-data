@@ -12,11 +12,11 @@ class SessionDBAuth(SessionExpAuth):
         ses_id = super().create_session(user_id)
         if not ses_id:
             return None
-        user_info = {
+        kwargs = {
             "user_id": user_id,
             "session_id": session_id
         }
-        usr_session = UserSession(**user_info)
+        usr_session = UserSession(**kwargs)
         usr_session.save()
         return ses_id
 
