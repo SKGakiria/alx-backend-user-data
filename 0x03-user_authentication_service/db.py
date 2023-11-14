@@ -42,10 +42,23 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         """Finds a user based on a given criteria"""
         all_users = self._session.query(User)
-        for k, v in kwargs.items():
+        for k, val in kwargs.items():
             if k not in User.__dict__:
                 raise InvalidRequestError
             for user in all_users:
-                if getattr(user, k) == v:
+                if getattr(user, k) == val:
                     return user
         raise NoResultFound
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Updates a user based on a given user_id"""
+        try:
+            user = self.find_user_by(id=user_id)
+        except NoResultFound:
+            raise ValueError()
+        for k, val in kwargs.items():
+            if hasattr(user, k):
+                setattr(user, k, val)
+            else:
+                raise ValueError
+        self._session.commit()
