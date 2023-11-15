@@ -2,6 +2,8 @@
 """The Main file"""
 import requests
 
+BASE_URL = "http://127.0.0.1:5000/"
+
 
 def register_user(email: str, password: str) -> None:
     """Tests the registration of a user"""
@@ -39,7 +41,7 @@ def log_in(email: str, password: str) -> str:
     res = requests.post(url, data=info)
     assert res.status_code == 200
     assert (res.json() == {"email": email, "message": "logged in"})
-    return res.cookies('session_id')
+    return res.cookies['session_id']
 
 
 def profile_unlogged() -> None:
@@ -59,7 +61,6 @@ def profile_logged(session_id: str) -> None:
 
 def log_out(session_id: str) -> None:
     """Tests for log out"""
-    BASE_URL = "http://127.0.0.1:5000/"
     url = "{}/sessions".format(BASE_URL)
     cookies = {'session_id': session_id}
     res = requests.delete(url, cookies=cookies)
